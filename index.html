@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+
+    <label>Radix 1</label>
+    <input type="text" id="r1"><br>
+    <label>Radix 2</label>
+    <input type="text" id="r2"><br>
+    <label>Number</label>
+    <input type="text" id="num"><br>
+    <button onclick="run()">Run</button>
+    <div id="answer"></div>
+    <br><br><br>
+    <label>Expression</label>
+    <input type="text" id="expr"><br>
+    <button onclick="solve()">Run</button>
+    <div id="answer2"></div>
+    
+
+    <script>
+      function run(){
+        r1=parseInt(document.getElementById('r1').value);
+        r2=parseInt(document.getElementById('r2').value);
+        num=parseInt(document.getElementById('num').value);
+        var newnum = parseInt(num,r1);
+        newnum = newnum.toString(r2)        
+        answer = document.getElementById('answer');
+        answer.innerHTML = newnum;
+      }
+      function solve(){
+        expr=document.getElementById('expr').value;
+        var result = eval(expr);
+        answer2 = document.getElementById('answer2');
+        answer2.innerHTML = result;
+
+      }
+    </script>
+  </body>
+</html>
