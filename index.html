@@ -34,11 +34,11 @@
         answer.innerHTML = newnum;
       }
       function solve(){
-        expr=document.getElementById('expr').value;
-        var result = eval(expr);
+        expr=document.getElementById('expr');
+        var result = eval(expr.value);
         answer2 = document.getElementById('answer2');
         answer2.innerHTML = result;
-
+        expr.value=result;
       }
     </script>
   </body>
