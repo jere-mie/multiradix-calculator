@@ -69,7 +69,20 @@
             </div>
           </form>      
           <br><br><br><br><br>
-
+          <input type="text" id="test">
+          <button onclick="addExpr(1)">1</button>
+          <button onclick="addExpr(2)">2</button>
+          <button onclick="addExpr(3)">3</button>
+          <button onclick="addExpr(4)">4</button>
+          <button onclick="addExpr(5)">5</button>
+          <button onclick="addExpr(6)">6</button>
+          <button onclick="addExpr(7)">7</button>
+          <button onclick="addExpr(8)">8</button>
+          <button onclick="addExpr(9)">9</button>
+          <button onclick="addExpr(0)">0</button>
+          <button onclick="clearExpr()">AC</button>
+          
+          <br><br><br>
         </div>
       </div>
     </div>
@@ -91,6 +104,14 @@
     
 
     <script>
+      function clearExpr(){
+        var test=document.getElementById('test');
+        test.value = '';
+      }
+      function addExpr(num){
+        var test=document.getElementById('test');
+        test.value = test.value.concat(num);
+      }
       function convert(value, base = 2) {
         var [integer, fraction = ''] = value.toString().split('.');
 
