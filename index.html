@@ -48,7 +48,6 @@
         exprrad=parseInt(document.getElementById('exprrad').value);
         expr=document.getElementById('expr').value;
         var result = convertExpr(expr,exprrad);
-        // var result = eval(expr);
         answer2 = document.getElementById('answer2');
         answer2.innerHTML = result;
         var l = Array.from(expr.value);
@@ -61,6 +60,9 @@
       function convertExpr(expr, base){
         var arr = [''];
         for (var i=0; i<expr.length; i++){
+          if(expr[i]==';'){
+            return "input error";
+          }
           if(!isNaN(expr[i]) || expr[i]=='.'){
             arr[arr.length-1] = arr[arr.length-1].concat(expr[i]);
           }else{
