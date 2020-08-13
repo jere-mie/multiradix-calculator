@@ -3,26 +3,86 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <meta property="og:site_name" content="Bornais.ca" />
+    <meta property="og:title" content="Multi-Radix Calculator" />
+    <meta property="og:description" content="Calculator and converter for numbers of different bases. Made by Jeremie Bornais." />
+    <!-- <meta property="og:image" content="me.png" /> -->
+    <meta property="og:type" content="website" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>repl.it</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <form action="" onsubmit="run(); return false">
+            <br><br><br>
+            <h1 style="text-align: center;">Radix (Base) Converter</h1>
+            <br>
+            <div class="form-group">
+              <label for="r1">Radix (Base) 1 (Input Number)</label>
+              <input type="text" class="form-control" id="r1" required>
+            </div>
+            <div class="form-group">
+              <label for="r2">Radix (Base) 2 (Output Number)</label>
+              <input type="text" class="form-control" id="r2" required>
+            </div>
+            <div class="form-group">
+              <label for="num">Number</label>
+              <input type="text" class="form-control" id="num" required>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="form-group">
+              <label for="answer">Answer</label>
+              <input type="text" class="form-control" id="answer" readonly>
+            </div>
+          </form>      
+          <br><br><br><br>
+          <form action="" onsubmit="solve(); return false">
+            <br><br><br>
+            <h1 style="text-align: center;">Calculator</h1>
+            <br>
+            <div class="form-group">
+              <label for="exprrad">Radix (Base) of Nums in Expression</label>
+              <input type="text" class="form-control" id="exprrad" required>
+            </div>
+            <div class="form-group">
+              <label for="expr">Expression</label>
+              <input type="text" class="form-control" id="expr" required>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="form-group">
+              <label for="answer">Answer</label>
+              <input type="text" class="form-control" id="answer2" readonly>
+            </div>
+          </form>      
+          <br><br><br><br><br>
 
-    <label>Radix 1</label>
+        </div>
+      </div>
+    </div>
+    <!-- <label>Radix 1</label>
     <input type="text" id="r1"><br>
     <label>Radix 2</label>
     <input type="text" id="r2"><br>
     <label>Number</label>
     <input type="text" id="num"><br>
     <button onclick="run()">Run</button>
-    <div id="answer"></div>
-    <br><br><br>
+    <div id="answer"></div> -->
+    <!-- <br><br><br>
     <label>Expression Radix</label>
     <input type="text" id="exprrad"><br>
     <label>Expression</label>
     <input type="text" id="expr"><br>
     <button onclick="solve()">Run</button>
-    <div id="answer2"></div>
+    <div id="answer2"></div> -->
     
 
     <script>
@@ -42,21 +102,18 @@
         var newnum = convert(num,r1); //converts to base 10
         newnum = newnum.toString(r2); //converts to base r2
         answer = document.getElementById('answer');
-        answer.innerHTML = newnum;
+        answer.value = newnum;
       }
       function solve(){
         exprrad=parseInt(document.getElementById('exprrad').value);
         expr=document.getElementById('expr').value;
         var result = convertExpr(expr,exprrad);
         answer2 = document.getElementById('answer2');
-        answer2.innerHTML = result;
-        var l = Array.from(expr.value);
-        for (var i=0; i<l.length; i++){
-          console.log(l[i]);
-        }
-        expr.value=result;
+        answer2.value = result;
+        // expr.value=result;
         
       }
+
       function convertExpr(expr, base){
         var arr = [''];
         for (var i=0; i<expr.length; i++){
@@ -78,5 +135,8 @@
         return eval(arr.join('')).toString(base);
       }
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
   </body>
 </html>
