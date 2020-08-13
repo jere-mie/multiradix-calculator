@@ -16,6 +16,54 @@
       .thin{
         font-weight:200;
       }
+      .fcontainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .calculator{
+        display: grid;
+        background-color: antiquewhite;
+      }
+      .calculator .test{
+        grid-column: span 4;
+        height: 80px;
+        text-align: right;
+        border:none;
+        outline:none;
+        padding:10px;
+        font-size: 18px;
+        background-color: aliceblue;
+      }
+      .calculator span{
+        display:grid;
+        width: 60px;
+        height: 60px;
+        color: #fff;
+        background-color: #0c2835;
+        place-items: center;
+        border: 1px solid black;
+      }
+      .calculator span:active{
+        background-color: #74ff3b;
+        color:#111
+      }
+      .calculator span:hover{
+        background-color: #14445a;
+        /* color:#111 */
+      }
+      .calculator span.clear{
+        grid-column: span 2;
+        width: 120px;
+      }
+      .calculator span.plus{
+        grid-row: span 2;
+        height: 120px;
+      }
+      .calculator span.equals{
+        grid-column: span 2;
+        width: 120px;
+      }
     </style>
   </head>
   <body>
@@ -68,7 +116,7 @@
               <input type="text" class="form-control" id="answer2" readonly>
             </div>
           </form>      
-          <br><br><br><br><br>
+          <!-- <br><br><br><br><br>
           <input type="text" id="test">
           <button onclick="addExpr(1)">1</button>
           <button onclick="addExpr(2)">2</button>
@@ -80,8 +128,31 @@
           <button onclick="addExpr(8)">8</button>
           <button onclick="addExpr(9)">9</button>
           <button onclick="addExpr(0)">0</button>
-          <button onclick="clearExpr()">AC</button>
-          
+          <button onclick="clearExpr()">AC</button> -->
+          <br><br><br><br><br>
+          <div class="fcontainer">
+            <form action="" class="calculator">
+              <input type="text" class="test" id="test">
+              <span class="num clear" onclick="clearExpr()">C</span>
+              <span class="num" onclick="addExpr('/')">/</span>
+              <span class="num" onclick="addExpr('*')">*</span>
+              <span class="num" onclick="addExpr(7)">7</span>
+              <span class="num" onclick="addExpr(8)">8</span>
+              <span class="num" onclick="addExpr(9)">9</span>
+              <span class="num" onclick="addExpr('-')">-</span>
+              <span class="num" onclick="addExpr(4)">4</span>
+              <span class="num" onclick="addExpr(5)">5</span>
+              <span class="num" onclick="addExpr(6)">6</span>
+              <span class="num plus" onclick="addExpr('+')">+</span>
+              <span class="num" onclick="addExpr(1)">1</span>
+              <span class="num" onclick="addExpr(2)">2</span>
+              <span class="num" onclick="addExpr(3)">3</span>
+              <span class="num" onclick="addExpr(0)">0</span>
+              <span class="num" onclick="addExpr('.')">.</span>
+              <span class="num equals" onclick="addExpr(1)">=</span>
+            </form>          
+  
+          </div>
           <br><br><br>
         </div>
       </div>
