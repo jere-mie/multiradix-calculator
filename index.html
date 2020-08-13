@@ -12,6 +12,11 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Multi-Radix Calculator</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+      .thin{
+        font-weight:200;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -23,15 +28,15 @@
             <h1 style="text-align: center;">Radix (Base) Converter</h1>
             <br>
             <div class="form-group">
-              <label for="r1">Radix (Base) 1 (Input Number)</label>
+              <label for="r1">Starting Radix (Base)</label>
               <input type="text" class="form-control" id="r1" required>
             </div>
             <div class="form-group">
-              <label for="r2">Radix (Base) 2 (Output Number)</label>
+              <label for="r2">Output Radix (Base)</label>
               <input type="text" class="form-control" id="r2" required>
             </div>
             <div class="form-group">
-              <label for="num">Number</label>
+              <label for="num">Number To Convert</label>
               <input type="text" class="form-control" id="num" required>
             </div>
             <div class="form-group">
@@ -48,11 +53,11 @@
             <h1 style="text-align: center;">Calculator</h1>
             <br>
             <div class="form-group">
-              <label for="exprrad">Radix (Base) of Nums in Expression</label>
+              <label for="exprrad">Radix (Base) of Numbers in Expression</label>
               <input type="text" class="form-control" id="exprrad" required>
             </div>
             <div class="form-group">
-              <label for="expr">Expression</label>
+              <label for="expr">Expression (ex. 5*4+2)</label>
               <input type="text" class="form-control" id="expr" required>
             </div>
             <div class="form-group">
