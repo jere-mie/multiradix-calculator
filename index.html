@@ -33,7 +33,8 @@
         outline:none;
         padding:10px;
         font-size: 18px;
-        background-color: aliceblue;
+        background-color: #17485f;
+        color: #fff;
       }
       .calculator span{
         display:grid;
@@ -44,13 +45,13 @@
         place-items: center;
         border: 1px solid black;
       }
-      .calculator span:active{
-        background-color: #74ff3b;
-        color:#111
-      }
       .calculator span:hover{
         background-color: #14445a;
         /* color:#111 */
+      }
+      .calculator span:active{
+        background-color: #74ff3b;
+        color:#111
       }
       .calculator span.clear{
         grid-column: span 2;
@@ -95,7 +96,7 @@
               <input type="text" class="form-control" id="answer" readonly>
             </div>
           </form>      
-          <br><br><br><br>
+          <!-- <br><br><br><br>
           <form action="" onsubmit="solve(); return false">
             <br><br><br>
             <h1 style="text-align: center;">Calculator</h1>
@@ -115,7 +116,7 @@
               <label for="answer">Answer</label>
               <input type="text" class="form-control" id="answer2" readonly>
             </div>
-          </form>      
+          </form>       -->
           <!-- <br><br><br><br><br>
           <input type="text" id="test">
           <button onclick="addExpr(1)">1</button>
@@ -130,28 +131,33 @@
           <button onclick="addExpr(0)">0</button>
           <button onclick="clearExpr()">AC</button> -->
           <br><br><br><br><br>
+          <h1 style="text-align: center;">Calculator</h1>
+          <br>
+          <div class="form-group">
+            <label for="exprrad">Radix (Base) of Numbers in Expression</label>
+            <input type="text" class="form-control" id="exprrad" value="10" required>
+          </div>
           <div class="fcontainer">
-            <form action="" class="calculator">
-              <input type="text" class="test" id="test">
-              <span class="num clear" onclick="clearExpr()">C</span>
-              <span class="num" onclick="addExpr('/')">/</span>
-              <span class="num" onclick="addExpr('*')">*</span>
-              <span class="num" onclick="addExpr(7)">7</span>
-              <span class="num" onclick="addExpr(8)">8</span>
-              <span class="num" onclick="addExpr(9)">9</span>
-              <span class="num" onclick="addExpr('-')">-</span>
-              <span class="num" onclick="addExpr(4)">4</span>
-              <span class="num" onclick="addExpr(5)">5</span>
-              <span class="num" onclick="addExpr(6)">6</span>
-              <span class="num plus" onclick="addExpr('+')">+</span>
-              <span class="num" onclick="addExpr(1)">1</span>
-              <span class="num" onclick="addExpr(2)">2</span>
-              <span class="num" onclick="addExpr(3)">3</span>
-              <span class="num" onclick="addExpr(0)">0</span>
-              <span class="num" onclick="addExpr('.')">.</span>
-              <span class="num equals" onclick="addExpr(1)">=</span>
-            </form>          
-  
+              <div class="calculator">
+                <input type="text" class="test" id="expr">
+                <span class="num clear" onclick="clearExpr()">C</span>
+                <span class="num" onclick="addExpr('/')">/</span>
+                <span class="num" onclick="addExpr('*')">*</span>
+                <span class="num" onclick="addExpr(7)">7</span>
+                <span class="num" onclick="addExpr(8)">8</span>
+                <span class="num" onclick="addExpr(9)">9</span>
+                <span class="num" onclick="addExpr('-')">-</span>
+                <span class="num" onclick="addExpr(4)">4</span>
+                <span class="num" onclick="addExpr(5)">5</span>
+                <span class="num" onclick="addExpr(6)">6</span>
+                <span class="num plus" onclick="addExpr('+')">+</span>
+                <span class="num" onclick="addExpr(1)">1</span>
+                <span class="num" onclick="addExpr(2)">2</span>
+                <span class="num" onclick="addExpr(3)">3</span>
+                <span class="num" onclick="addExpr(0)">0</span>
+                <span class="num" onclick="addExpr('.')">.</span>
+                <span class="num equals" onclick="solve()">=</span>   
+              </div>
           </div>
           <br><br><br>
         </div>
@@ -176,12 +182,13 @@
 
     <script>
       function clearExpr(){
-        var test=document.getElementById('test');
+        var test=document.getElementById('expr');
         test.value = '';
       }
       function addExpr(num){
-        var test=document.getElementById('test');
+        var test=document.getElementById('expr');
         test.value = test.value.concat(num);
+        
       }
       function convert(value, base = 2) {
         var [integer, fraction = ''] = value.toString().split('.');
@@ -205,7 +212,7 @@
         exprrad=parseInt(document.getElementById('exprrad').value);
         expr=document.getElementById('expr').value;
         var result = convertExpr(expr,exprrad);
-        answer2 = document.getElementById('answer2');
+        answer2 = document.getElementById('expr');
         answer2.value = result;
         // expr.value=result;
         
