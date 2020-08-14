@@ -146,26 +146,30 @@
             <input type="text" class="form-control" id="exprrad" value="10" required>
           </div>
           <!-- <div class="fcontainer"> -->
-              <div class="calculator">
-                <input type="text" class="test" id="expr">
-                <div class="num clear" onclick="clearExpr()">C</div>
-                <div class="num" onclick="addExpr('/')">/</div>
-                <div class="num" onclick="addExpr('*')">*</div>
-                <div class="num" onclick="addExpr(7)">7</div>
-                <div class="num" onclick="addExpr(8)">8</div>
-                <div class="num" onclick="addExpr(9)">9</div>
-                <div class="num" onclick="addExpr('-')">-</div>
-                <div class="num" onclick="addExpr(4)">4</div>
-                <div class="num" onclick="addExpr(5)">5</div>
-                <div class="num" onclick="addExpr(6)">6</div>
-                <div class="num plus" onclick="addExpr('+')">+</div>
-                <div class="num" onclick="addExpr(1)">1</div>
-                <div class="num" onclick="addExpr(2)">2</div>
-                <div class="num" onclick="addExpr(3)">3</div>
-                <div class="num" onclick="addExpr(0)">0</div>
-                <div class="num" onclick="addExpr('.')">.</div>
-                <div class="num equals" onclick="solve()">=</div>   
-              </div>
+          <form action="" onsubmit="solve(); return false">
+            <div class="calculator">
+              <input type="text" class="test" id="expr">
+              <div class="num clear" onclick="clearExpr()">C</div>
+              <div class="num" onclick="addExpr('/')">/</div>
+              <div class="num" onclick="addExpr('*')">*</div>
+              <div class="num" onclick="addExpr(7)">7</div>
+              <div class="num" onclick="addExpr(8)">8</div>
+              <div class="num" onclick="addExpr(9)">9</div>
+              <div class="num" onclick="addExpr('-')">-</div>
+              <div class="num" onclick="addExpr(4)">4</div>
+              <div class="num" onclick="addExpr(5)">5</div>
+              <div class="num" onclick="addExpr(6)">6</div>
+              <div class="num plus" onclick="addExpr('+')">+</div>
+              <div class="num" onclick="addExpr(1)">1</div>
+              <div class="num" onclick="addExpr(2)">2</div>
+              <div class="num" onclick="addExpr(3)">3</div>
+              <div class="num" onclick="addExpr(0)">0</div>
+              <div class="num" onclick="addExpr('.')">.</div>
+              <!-- <div class="num equals" type="submit">=</div>    -->
+              <div class="num equals" onclick="solve()">=</div>   
+            </div>
+          </form>
+          
           <!-- </div> -->
           <br><br><br>
         </div>
