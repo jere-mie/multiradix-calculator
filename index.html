@@ -187,7 +187,7 @@
     <button onclick="solve()">Run</button>
     <div id="answer2"></div> -->
     
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.1.0/math.min.js"></script>
     <script>
       function clearExpr(){
         var test=document.getElementById('expr');
@@ -240,11 +240,19 @@
           }
         }
         for (var i=0; i<arr.length; i++){
-          if (!isNaN(arr[i])){
+          if (!isNaN(arr[i]) && arr[i]!=''){
             arr[i] = convert(arr[i],base);
           }
         }
-        return eval(arr.join('')).toString(base);
+        console.log(arr);
+        if(arr[0]==NaN){
+          // arr[0]=''
+          delete arr[0];
+        }
+        console.log(arr);
+        var q = arr.join('');
+        console.log(q);
+        return math.evaluate(q).toString(base);
       }
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
