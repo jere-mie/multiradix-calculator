@@ -210,6 +210,7 @@
           .reduceRight((r, a) => (r + parseInt(a, base)) / base, 0);
       }
 
+
       function run(){
         r1=parseInt(document.getElementById('r1').value);
         r2=parseInt(document.getElementById('r2').value);
@@ -224,6 +225,7 @@
         exprrad=parseInt(document.getElementById('exprrad').value);
         expr=document.getElementById('expr').value;
         var result = 0;
+        console.log(exprrad);
         if (exprrad==10){
           result = math.evaluate(expr);
         }else{
@@ -236,28 +238,36 @@
       }
 
       function convertExpr(expr, base){
+        var isAlpha = function(ch){
+          return /^[A-Z]$/i.test(ch);
+        }
         var arr = [''];
+        var arrConvert = [false];
         for (var i=0; i<expr.length; i++){
-          if(expr[i]==';'){
-            return "input error";
-          }
-          if(!isNaN(expr[i]) || expr[i]=='.'){
+
+          if(!isNaN(expr[i]) || expr[i]=='.' || (isAlpha(expr[i]) && base > 10)){
             arr[arr.length-1] = arr[arr.length-1].concat(expr[i]);
+            arrConvert[arrConvert.length-1] = true;
           }else{
             arr.push(expr[i]);
-            arr.push('');            
+            arrConvert.push(false);
+            arr.push('');
+            arrConvert.push(false);
           }
         }
         for (var i=0; i<arr.length; i++){
-          if (!isNaN(arr[i]) && arr[i]!='' && arr[i]!=' '){
+          if(arrConvert[i]){
             arr[i] = convert(arr[i],base);
           }
+          // if (!isNaN(arr[i]) && arr[i]!='' && arr[i]!=' '){
+          //   arr[i] = convert(arr[i],base);
+          // }
         }
         console.log(arr);
-        if(arr[0]==NaN){
-          // arr[0]=''
-          delete arr[0];
-        }
+        // if(arr[0]==NaN){
+        //   // arr[0]=''
+        //   delete arr[0];
+        // }
         console.log(arr);
         var q = arr.join('');
         console.log(q);
