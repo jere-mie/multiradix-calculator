@@ -223,7 +223,12 @@
       function solve(){
         exprrad=parseInt(document.getElementById('exprrad').value);
         expr=document.getElementById('expr').value;
-        var result = convertExpr(expr,exprrad);
+        var result = 0;
+        if (exprrad==10){
+          result = math.evaluate(expr);
+        }else{
+          result = convertExpr(expr,exprrad);
+        }
         answer2 = document.getElementById('expr');
         answer2.value = result;
         // expr.value=result;
