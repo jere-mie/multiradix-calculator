@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:site_name" content="Bornais.ca" />
+    <meta property="og:title" content="Multi-Radix Calculator" />
+    <meta property="og:description" content="Calculator and converter for numbers of different bases. Made by Jeremie Bornais." />
+    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Calculator_icon.svg/512px-Calculator_icon.svg.png" />
+    <meta property="og:type" content="website" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Multi-Radix Calculator</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+      .thin{
+        font-weight:200;
+      }
+      .fcontainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <br><br><br>
+                <h1 class="thin">Matrix Multiplier</h1>
+                <!-- <form action="" onsubmit="run2(); return false"> -->
+                    <textarea class="form-control" name="" cols="30" rows="10" id="textar"></textarea>
+                    <button class="btn btn-outline-primary" onclick="run2()">Submit</button>
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.1.0/math.min.js"></script>
+    <script>
+      function convert(value, base = 2) {
+        var [integer, fraction = ''] = value.toString().split('.');
+
+        return parseInt(integer, base) + (integer[0] !== '-' || -1) * fraction
+          .split('')
+          .reduceRight((r, a) => (r + parseInt(a, base)) / base, 0);
+      }
+      function run2(){
+        console.log(document.getElementById('textar').value);
+      }
+
+      function solve(){
+        exprrad=parseInt(document.getElementById('exprrad').value);
+        expr=document.getElementById('expr').value;
+        var result = convertExpr(expr,exprrad);
+        answer2 = document.getElementById('expr');
+        answer2.value = result;
+        // expr.value=result;
+        
+      }
+
+      function convertExpr(expr, base){
+        var arr = [''];
+        for (var i=0; i<expr.length; i++){
+          if(expr[i]==';'){
+            return "input error";
+          }
+          if(!isNaN(expr[i]) || expr[i]=='.'){
+            arr[arr.length-1] = arr[arr.length-1].concat(expr[i]);
+          }else{
+            arr.push(expr[i]);
+            arr.push('');            
+          }
+        }
+        for (var i=0; i<arr.length; i++){
+          if (!isNaN(arr[i])){
+            arr[i] = convert(arr[i],base);
+          }
+        }
+        return eval(arr.join('')).toString(base);
+      }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+  </body>
+</html>
