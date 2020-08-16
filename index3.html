@@ -16,6 +16,9 @@
       .thin{
         font-weight:200;
       }
+      .center{
+          text-align: center;
+      }
       .fcontainer{
         display: flex;
         justify-content: center;
@@ -24,17 +27,73 @@
   </head>
   <body>
     <div class="container">
+        <br><br><br>
+        <h1 class="thin center">Matrix Multiplier</h1>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                    <br><br>
+                    <h3 class="center">Matrix 1</h3>
+                    <textarea class="form-control" name="" cols="20" rows="5" id="mat1"></textarea>
+            </div>
+            <div class="col-md-4">
+                <br><br>
+                <h3 class="center">Matrix 2</h3>
+                <textarea class="form-control" name="" cols="20" rows="5" id="mat2"></textarea>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <br><br><br>
-                <h1 class="thin">Matrix Multiplier</h1>
-                <!-- <form action="" onsubmit="run2(); return false"> -->
-                    <textarea class="form-control" name="" cols="30" rows="10" id="textar"></textarea>
-                    <button class="btn btn-outline-primary" onclick="run2()">Submit</button>
-                <!-- </form> -->
+                <br><br>
+                <p class="center">
+                    <button class="btn btn-outline-primary" onclick="matmult()">Multiply</button>
+                </p>
+                <h3 class="center">Answer</h3>
+                <textarea class="form-control" name="" cols="20" rows="5" id="matanswer" readonly></textarea>    
             </div>
         </div>
+    </div>
+
+
+    <div class="container">
+        <br><br><br>
+        <h1 class="thin center">Matrix Info</h1>
+        <br>
+        <select class="form-control" id="matselect">
+            <option>Invert Matrix</option>
+            <option>Transpose Matrix</option>
+            <option>Calculate Determinant</option>
+            <option>Calculate Trace</option>
+            <option>Calculate Eigenvalues</option>
+            <option>Calculate Eigenvectors</option>
+        </select>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                    <br><br>
+                    <h3 class="center">Matrix</h3>
+                    <textarea class="form-control" name="" cols="20" rows="5" id="mat3"></textarea>
+            </div>
+            <div class="col-md-4">
+                <br><br>
+                <h3 class="center">Answer</h3>
+                <textarea class="form-control" name="" cols="20" rows="5" id="matinfoans" readonly></textarea>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <br><br>
+                <p class="center">
+                    <button class="btn btn-outline-primary" onclick="matinfo()">Caclulate</button>
+                </p>
+            </div>
+        </div>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
     </div>
 
     <!-- scripts -->
@@ -47,9 +106,130 @@
           .split('')
           .reduceRight((r, a) => (r + parseInt(a, base)) / base, 0);
       }
-      function run2(){
-        console.log(document.getElementById('textar').value);
+      function flipBit(bit){
+        return (bit == '0') ? '1' : '0';
       }
+      function onecf(num){
+        num = num.toString();
+        flipped = "";
+        for(var i=0; i<num.length; i++){
+            if(num[i]!='.'){
+                flipped+=flipBit(num[i]);
+            }else{
+                flipped+='.'
+            }
+        }
+        return flipped;
+      }
+      function twocf(num){
+        num = onecf(num);
+        num = num.split('');
+        var i = num.length-1;
+        for (i=num.length-1; i>=0; i--){
+            if(num[i]=='1'){
+                num[i]='0';
+            }else if(num[i]=='0'){
+                num[i] = '1';
+                break;
+            }
+        }
+        if(i==-1){
+            return '1'+num.join('');
+        }
+        return num.join('');
+      }
+      function matmult(){
+        var a = document.getElementById('mat1').value.split('\n');
+        var b = document.getElementById('mat2').value.split('\n');
+        let answer = document.getElementById('matanswer'); 
+        for(var i=0; i<a.length; i++){
+            a[i] = a[i].split(' ');
+        }        
+        for(var i=0; i<b.length; i++){
+            b[i] = b[i].split(' ');
+        }
+        var c = math.multiply(a,b);
+        console.log(c[0]);
+        let result = "";
+        for (var i=0; i<c.length; i++){
+            for(var j=0; j<c[i].length; j++){
+                result+=c[i][j];
+                result+=' ';
+            }
+            result+='\n';
+        }
+        answer.value = result;        
+      }
+
+      function matinfo(){
+        var a = document.getElementById('mat3').value.split('\n');
+        let answer = document.getElementById('matinfoans'); 
+        let select = document.getElementById('matselect').value;
+        var c = "X";
+        var d = "";
+        var result = "";
+        for(var i=0; i<a.length; i++){
+            a[i] = a[i].split(' ');
+            for(var j=0; j<a[i].length; j++){
+                a[i][j] = parseFloat(a[i][j]);
+            }
+        }
+        switch(select){
+            case "Invert Matrix":
+                c = math.inv(a);
+                break;
+            case "Transpose Matrix":
+                c = math.transpose(a);
+                break;
+            case "Calculate Determinant":
+                result = math.det(a);
+                break;
+            case "Calculate Trace":
+                result = math.trace(a);
+                break;
+            case "Calculate Eigenvalues":
+                console.log(math.eigs(a).values);
+                d = math.eigs(a).values;
+                for(var i=0; i<d.length; i++){
+                    result+="=> "+d[i]+'\n';
+                }
+                break;
+            case "Calculate Eigenvectors":
+                console.log(math.eigs(a).vectors);
+                d = math.eigs(a).vectors;
+                for(var i=0; i<d.length; i++){
+                    result+="Vector "+(i+1)+": ";
+                    for(var j=0; j<d[i].length; j++){
+                        result+=d[i][j]+" ";
+                    }
+                    result+='\n';
+                }
+                break;
+        }
+        if(c=="X"){
+            answer.value = result;
+        }else{
+        for (var i=0; i<c.length; i++){
+            for(var j=0; j<c[i].length; j++){
+                result+=c[i][j];
+                result+=' ';
+            }
+            result+='\n';
+        }
+        answer.value = result;
+        }
+
+      }
+    // <option>Invert Matrix</option>
+    // <option>Transpose Matrix</option>
+    // <option>Calculate Determinant</option>
+    // <option>Calculate Trace</option>
+    // <option>Calculate Eigenvalues</option>
+    // <option>Calculate Eigenvectors</option>
+
+
+
+
 
       function solve(){
         exprrad=parseInt(document.getElementById('exprrad').value);
