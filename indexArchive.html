@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:site_name" content="Bornais.ca" />
+    <meta property="og:title" content="Multi-Radix Calculator" />
+    <meta property="og:description" content="Calculator and converter for numbers of different bases. Made by Jeremie Bornais." />
+    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Calculator_icon.svg/512px-Calculator_icon.svg.png" />
+    <meta property="og:type" content="website" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Multi-Radix Calculator</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+      .thin{
+        font-weight:200;
+      }
+      .center{
+        text-align: center;
+      }
+      .fcontainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .calculator{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        background-color: antiquewhite;
+      }
+      .calculator .test{
+        grid-column: 1/5;
+        height: 80px;
+        text-align: right;
+        border:none;
+        outline:none;
+        padding:10px;
+        font-size: 18px;
+        background-color: #17485f;
+        color: #fff;
+      }
+      .calculator div{
+        /* display:grid; */
+        /* width: 60px; */
+        display: flex;
+        width: 100%;
+        height: 60px;
+        color: #fff;
+        background-color: #0c2835;
+        place-items: center; 
+        align-items: center;
+        justify-items: center;
+        align-content: center;
+        justify-content: center;
+        border: 1px solid black;
+      }
+      .calculator div:active{
+        background-color: #74ff3b;
+        color:#111
+      }
+      .calculator div:hover{
+        background-color: #14445a;
+        /* color:#111 */
+      }
+      .calculator div.clear{
+        grid-column: span 2;
+        /* width: 120px; */
+      }
+      .calculator div.plus{
+        grid-row: span 2;
+        height: 100%;
+        /* height: 120px; */
+      }
+      .calculator div.equals{
+        grid-column: span 2;
+        /* width: 120px; */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <form action="" onsubmit="run(); return false">
+            <br><br><br>
+            <h1 style="text-align: center;">Radix (Base) Converter</h1>
+            <br>
+            <div class="form-group">
+              <label for="r1">Starting Radix (Base)</label>
+              <input type="text" class="form-control" id="r1" required>
+            </div>
+            <div class="form-group">
+              <label for="r2">Output Radix (Base)</label>
+              <input type="text" class="form-control" id="r2" required>
+            </div>
+            <div class="form-group">
+              <label for="num">Number To Convert</label>
+              <input type="text" class="form-control" id="num" required>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="form-group">
+              <label for="answer">Answer</label>
+              <input type="text" class="form-control" id="answer" readonly>
+            </div>
+          </form>      
+          <!-- <br><br><br><br>
+          <form action="" onsubmit="solve(); return false">
+            <br><br><br>
+            <h1 style="text-align: center;">Calculator</h1>
+            <br>
+            <div class="form-group">
+              <label for="exprrad">Radix (Base) of Numbers in Expression</label>
+              <input type="text" class="form-control" id="exprrad" required>
+            </div>
+            <div class="form-group">
+              <label for="expr">Expression (ex. 5*4+2)</label>
+              <input type="text" class="form-control" id="expr" required>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="form-group">
+              <label for="answer">Answer</label>
+              <input type="text" class="form-control" id="answer2" readonly>
+            </div>
+          </form>       -->
+          <!-- <br><br><br><br><br>
+          <input type="text" id="test">
+          <button onclick="addExpr(1)">1</button>
+          <button onclick="addExpr(2)">2</button>
+          <button onclick="addExpr(3)">3</button>
+          <button onclick="addExpr(4)">4</button>
+          <button onclick="addExpr(5)">5</button>
+          <button onclick="addExpr(6)">6</button>
+          <button onclick="addExpr(7)">7</button>
+          <button onclick="addExpr(8)">8</button>
+          <button onclick="addExpr(9)">9</button>
+          <button onclick="addExpr(0)">0</button>
+          <button onclick="clearExpr()">AC</button> -->
+          <br><br><br><br><br>
+          <h1 style="text-align: center;">Calculator</h1>
+          <br>
+          <div class="form-group">
+            <label for="exprrad">Radix (Base) of Numbers in Expression</label>
+            <input type="text" class="form-control" id="exprrad" value="10" required>
+          </div>
+          <!-- <div class="fcontainer"> -->
+          <form action="" onsubmit="solve(); return false">
+            <div class="calculator">
+              <input type="text" class="test" id="expr">
+              <div class="num clear" onclick="clearExpr()">C</div>
+              <div class="num" onclick="addExpr('/')">/</div>
+              <div class="num" onclick="addExpr('*')">*</div>
+              <div class="num" onclick="addExpr(7)">7</div>
+              <div class="num" onclick="addExpr(8)">8</div>
+              <div class="num" onclick="addExpr(9)">9</div>
+              <div class="num" onclick="addExpr('-')">-</div>
+              <div class="num" onclick="addExpr(4)">4</div>
+              <div class="num" onclick="addExpr(5)">5</div>
+              <div class="num" onclick="addExpr(6)">6</div>
+              <div class="num plus" onclick="addExpr('+')">+</div>
+              <div class="num" onclick="addExpr(1)">1</div>
+              <div class="num" onclick="addExpr(2)">2</div>
+              <div class="num" onclick="addExpr(3)">3</div>
+              <div class="num" onclick="addExpr(0)">0</div>
+              <div class="num" onclick="addExpr('.')">.</div>
+              <!-- <div class="num equals" type="submit">=</div>    -->
+              <div class="num equals" onclick="solve()">=</div>   
+            </div>
+          </form>
+          
+          <!-- </div> -->
+          <br><br><br>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <br><br><br>
+      <h1 class="thin center">Matrix Multiplier</h1>
+      <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-4">
+                  <br><br>
+                  <h3 class="center">Matrix 1</h3>
+                  <textarea class="form-control" name="" cols="20" rows="5" id="mat1"></textarea>
+          </div>
+          <div class="col-md-4">
+              <br><br>
+              <h3 class="center">Matrix 2</h3>
+              <textarea class="form-control" name="" cols="20" rows="5" id="mat2"></textarea>
+          </div>
+          <div class="col-md-2"></div>
+      </div>
+      <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+              <br><br>
+              <p class="center">
+                  <button class="btn btn-outline-primary" onclick="matmult()">Multiply</button>
+              </p>
+              <h3 class="center">Answer</h3>
+              <textarea class="form-control" name="" cols="20" rows="5" id="matanswer" readonly></textarea>    
+          </div>
+      </div>
+  </div>
+
+
+  <div class="container">
+      <br><br><br>
+      <h1 class="thin center">Matrix Info</h1>
+      <br>
+      <select class="form-control" id="matselect">
+          <option>Invert Matrix</option>
+          <option>Transpose Matrix</option>
+          <option>Calculate Determinant</option>
+          <option>Calculate Trace</option>
+          <option>Calculate Eigenvalues</option>
+          <option>Calculate Eigenvectors</option>
+      </select>
+      <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-4">
+                  <br><br>
+                  <h3 class="center">Matrix</h3>
+                  <textarea class="form-control" name="" cols="20" rows="5" id="mat3"></textarea>
+          </div>
+          <div class="col-md-4">
+              <br><br>
+              <h3 class="center">Answer</h3>
+              <textarea class="form-control" name="" cols="20" rows="5" id="matinfoans" readonly></textarea>
+          </div>
+          <div class="col-md-2"></div>
+      </div>
+      <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+              <br><br>
+              <p class="center">
+                  <button class="btn btn-outline-primary" onclick="matinfo()">Caclulate</button>
+              </p>
+          </div>
+      </div>
+      <br><br><br><br><br>
+      <br><br><br><br><br>
+  </div>
+    <!-- <label>Radix 1</label>
+    <input type="text" id="r1"><br>
+    <label>Radix 2</label>
+    <input type="text" id="r2"><br>
+    <label>Number</label>
+    <input type="text" id="num"><br>
+    <button onclick="run()">Run</button>
+    <div id="answer"></div> -->
+    <!-- <br><br><br>
+    <label>Expression Radix</label>
+    <input type="text" id="exprrad"><br>
+    <label>Expression</label>
+    <input type="text" id="expr"><br>
+    <button onclick="solve()">Run</button>
+    <div id="answer2"></div> -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.1.0/math.min.js"></script>
+    <script>
+      function clearExpr(){
+        var test=document.getElementById('expr');
+        test.value = '';
+      }
+      function addExpr(num){
+        var test=document.getElementById('expr');
+        test.value = test.value.concat(num);
+        
+      }
+      function convert(value, base = 2) {
+        var [integer, fraction = ''] = value.toString().split('.');
+
+        return parseInt(integer, base) + (integer[0] !== '-' || -1) * fraction
+          .split('')
+          .reduceRight((r, a) => (r + parseInt(a, base)) / base, 0);
+      }
+      function flipBit(bit){
+        return (bit == '0') ? '1' : '0';
+      }
+      function onecf(num){
+        num = num.toString();
+        flipped = "";
+        for(var i=0; i<num.length; i++){
+            if(num[i]!='.'){
+                flipped+=flipBit(num[i]);
+            }else{
+                flipped+='.'
+            }
+        }
+        return flipped;
+      }
+      function twocf(num){
+        num = onecf(num);
+        num = num.split('');
+        var i = num.length-1;
+        for (i=num.length-1; i>=0; i--){
+            if(num[i]=='1'){
+                num[i]='0';
+            }else if(num[i]=='0'){
+                num[i] = '1';
+                break;
+            }
+        }
+        if(i==-1){
+            return '1'+num.join('');
+        }
+        return num.join('');
+      }
+      function matmult(){
+        var a = document.getElementById('mat1').value.split('\n');
+        var b = document.getElementById('mat2').value.split('\n');
+        let answer = document.getElementById('matanswer'); 
+        for(var i=0; i<a.length; i++){
+            a[i] = a[i].split(' ');
+        }        
+        for(var i=0; i<b.length; i++){
+            b[i] = b[i].split(' ');
+        }
+        var c = math.multiply(a,b);
+        console.log(c[0]);
+        let result = "";
+        for (var i=0; i<c.length; i++){
+            for(var j=0; j<c[i].length; j++){
+                result+=c[i][j];
+                result+=' ';
+            }
+            result+='\n';
+        }
+        answer.value = result;        
+      }
+
+      function matinfo(){
+        var a = document.getElementById('mat3').value.split('\n');
+        let answer = document.getElementById('matinfoans'); 
+        let select = document.getElementById('matselect').value;
+        var c = "X";
+        var d = "";
+        var result = "";
+        for(var i=0; i<a.length; i++){
+            a[i] = a[i].split(' ');
+            for(var j=0; j<a[i].length; j++){
+                a[i][j] = parseFloat(a[i][j]);
+            }
+        }
+        switch(select){
+            case "Invert Matrix":
+                c = math.inv(a);
+                break;
+            case "Transpose Matrix":
+                c = math.transpose(a);
+                break;
+            case "Calculate Determinant":
+                result = math.det(a);
+                break;
+            case "Calculate Trace":
+                result = math.trace(a);
+                break;
+            case "Calculate Eigenvalues":
+                console.log(math.eigs(a).values);
+                d = math.eigs(a).values;
+                for(var i=0; i<d.length; i++){
+                    result+="=> "+d[i]+'\n';
+                }
+                break;
+            case "Calculate Eigenvectors":
+                console.log(math.eigs(a).vectors);
+                d = math.eigs(a).vectors;
+                for(var i=0; i<d.length; i++){
+                    result+="Vector "+(i+1)+": ";
+                    for(var j=0; j<d[i].length; j++){
+                        result+=d[i][j]+" ";
+                    }
+                    result+='\n';
+                }
+                break;
+        }
+        if(c=="X"){
+            answer.value = result;
+        }else{
+        for (var i=0; i<c.length; i++){
+            for(var j=0; j<c[i].length; j++){
+                result+=c[i][j];
+                result+=' ';
+            }
+            result+='\n';
+        }
+        answer.value = result;
+        }
+
+      }
+
+
+      function run(){
+        r1=parseInt(document.getElementById('r1').value);
+        r2=parseInt(document.getElementById('r2').value);
+        num=document.getElementById('num').value;
+        // var newnum = parseInt(num,r1);
+        var newnum = convert(num,r1); //converts to base 10
+        newnum = newnum.toString(r2); //converts to base r2
+        answer = document.getElementById('answer');
+        answer.value = newnum;
+      }
+      function solve(){
+        exprrad=parseInt(document.getElementById('exprrad').value);
+        expr=document.getElementById('expr').value;
+        var result = 0;
+        console.log(exprrad);
+        if (exprrad==10){
+          result = math.evaluate(expr);
+        }else{
+          result = convertExpr(expr,exprrad);
+        }
+        answer2 = document.getElementById('expr');
+        answer2.value = result;
+        // expr.value=result;
+        
+      }
+
+      function convertExpr(expr, base){
+        var isAlpha = function(ch){
+          return /^[A-Z]$/i.test(ch);
+        }
+        var arr = [''];
+        var arrConvert = [false];
+        for (var i=0; i<expr.length; i++){
+
+          if(!isNaN(expr[i]) || expr[i]=='.' || (isAlpha(expr[i]) && base > 10)){
+            arr[arr.length-1] = arr[arr.length-1].concat(expr[i]);
+            arrConvert[arrConvert.length-1] = true;
+          }else{
+            arr.push(expr[i]);
+            arrConvert.push(false);
+            arr.push('');
+            arrConvert.push(false);
+          }
+        }
+        for (var i=0; i<arr.length; i++){
+          if(arrConvert[i]){
+            arr[i] = convert(arr[i],base);
+          }
+          // if (!isNaN(arr[i]) && arr[i]!='' && arr[i]!=' '){
+          //   arr[i] = convert(arr[i],base);
+          // }
+        }
+        console.log(arr);
+        // if(arr[0]==NaN){
+        //   // arr[0]=''
+        //   delete arr[0];
+        // }
+        console.log(arr);
+        var q = arr.join('');
+        console.log(q);
+        return math.evaluate(q).toString(base);
+      }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+  </body>
+</html>
