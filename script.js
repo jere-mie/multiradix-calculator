@@ -1,23 +1,23 @@
 function clearExpr(){
     var test=document.getElementById('expr');
     test.value = '';
-  }
-  function addExpr(num){
+}
+function addExpr(num){
     var test=document.getElementById('expr');
     test.value = test.value.concat(num);
     
-  }
-  function convert(value, base = 2) {
+}
+function convert(value, base = 2) {
     var [integer, fraction = ''] = value.toString().split('.');
 
     return parseInt(integer, base) + (integer[0] !== '-' || -1) * fraction
       .split('')
       .reduceRight((r, a) => (r + parseInt(a, base)) / base, 0);
-  }
-  function flipBit(bit){
+}
+function flipBit(bit){
     return (bit == '0') ? '1' : '0';
-  }
-  function onecf(num){
+}
+function onecf(num){
     num = num.toString();
     flipped = "";
     for(var i=0; i<num.length; i++){
@@ -28,8 +28,8 @@ function clearExpr(){
         }
     }
     return flipped;
-  }
-  function twocf(num){
+}
+function twocf(num){
     num = onecf(num);
     num = num.split('');
     var i = num.length-1;
@@ -45,8 +45,18 @@ function clearExpr(){
         return '1'+num.join('');
     }
     return num.join('');
-  }
-  function matmult(){
+}
+
+function oneandtwo(){
+    let num = document.getElementById('complimentNum').value;
+    let cf1 = document.getElementById('answer1cf');
+    let cf2 = document.getElementById('answer2cf');
+    cf1.value = onecf(num);
+    cf2.value = twocf(num);
+}
+
+  
+function matmult(){
     var a = document.getElementById('mat1').value.split('\n');
     var b = document.getElementById('mat2').value.split('\n');
     let answer = document.getElementById('matanswer'); 
@@ -67,9 +77,9 @@ function clearExpr(){
         result+='\n';
     }
     answer.value = result;        
-  }
+}
 
-  function matinfo(){
+function matinfo(){
     var a = document.getElementById('mat3').value.split('\n');
     let answer = document.getElementById('matinfoans'); 
     let select = document.getElementById('matselect').value;
@@ -127,10 +137,10 @@ function clearExpr(){
     answer.value = result;
     }
 
-  }
+}
 
 
-  function run(){
+function run(){
     r1=parseInt(document.getElementById('r1').value);
     r2=parseInt(document.getElementById('r2').value);
     num=document.getElementById('num').value;
@@ -139,8 +149,8 @@ function clearExpr(){
     newnum = newnum.toString(r2); //converts to base r2
     answer = document.getElementById('answer');
     answer.value = newnum;
-  }
-  function solve(){
+}
+function solve(){
     exprrad=parseInt(document.getElementById('exprrad').value);
     expr=document.getElementById('expr').value;
     var result = 0;
@@ -154,9 +164,9 @@ function clearExpr(){
     answer2.value = result;
     // expr.value=result;
     
-  }
+}
 
-  function convertExpr(expr, base){
+function convertExpr(expr, base){
     var isAlpha = function(ch){
       return /^[A-Z]$/i.test(ch);
     }
@@ -191,4 +201,4 @@ function clearExpr(){
     var q = arr.join('');
     console.log(q);
     return math.evaluate(q).toString(base);
-  }
+}
