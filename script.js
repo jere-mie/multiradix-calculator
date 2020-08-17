@@ -1,6 +1,6 @@
 window.addEventListener('touchstart', (e) => {
 
-    alert('fast touch');
+    // alert('fast touch');
 
 }, { passive : true});
 
