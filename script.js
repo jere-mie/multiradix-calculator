@@ -2,6 +2,10 @@ function clearExpr(){
     var test=document.getElementById('expr');
     test.value = '';
 }
+function bsExpr(){
+    var test = document.getElementById('expr');
+    test.value = test.value.slice(0,-1);
+}
 function addExpr(num){
     var test=document.getElementById('expr');
     test.value = test.value.concat(num);
