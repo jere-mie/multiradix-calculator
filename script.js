@@ -1,8 +1,3 @@
-window.addEventListener('touchstart', (e) => {
-
-    // alert('fast touch');
-
-}, { passive : true});
 
 function clearExpr(){
     var test=document.getElementById('expr');
