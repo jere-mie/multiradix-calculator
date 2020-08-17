@@ -51,7 +51,7 @@
         <div class="col-md-6">
           <form action="" onsubmit="run(); return false">
             <br><br><br>
-            <h1 style="text-align: center;">Radix (Base) Converter</h1>
+            <h1 class="thin center">Radix (Base) Converter</h1>
             <br>
             <div class="form-group">
               <label for="r1">Starting Radix (Base)</label>
@@ -77,7 +77,7 @@
           <!-- 1CF/2CF CONVERTER -->
           <form action="" onsubmit="oneandtwo(); return false" id="cfconverter">
             <br><br><br>
-            <h1 style="text-align: center;">1's Compliment / 2's Compliment Converter</h1>
+            <h1 class="thin center">1's Compliment / 2's Compliment Converter</h1>
             <br>
             <div class="form-group">
               <label for="complimentNum">Starting Number</label>
@@ -99,8 +99,11 @@
 
           <!-- CALCULATOR SECTION -->
           <br><br><br><br><br id="calc">
-          <h1 style="text-align: center;">Calculator</h1>
+          <h1 class="thin center">Calculator</h1>
           <br>
+          <small>You may use the calculator buttons below, or type in expressions into the calculator display.</small>
+          <small>This calculator currently supports brackets, exponents, factorials, trig functions (base 10 and below), and measurement conversions (ex "2 cm in inches", base 10 and below only)</small>
+          <br><br>
           <div class="form-group">
             <label for="exprrad">Radix (Base) of Numbers in Expression</label>
             <input type="text" class="form-control" id="exprrad" value="10" required>
@@ -136,12 +139,17 @@
     <div class="container" id="matmultiplier">
       <br><br><br>
       <h1 class="thin center">Matrix Multiplier</h1>
+      <br>
+      <p style="text-align:center">Please separate columns with single spaces, and rows go on new lines.</p>
+      <br>
       <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-4">
                   <br><br>
                   <h3 class="center">Matrix 1</h3>
-                  <textarea class="form-control" name="" cols="20" rows="5" id="mat1"></textarea>
+                  <textarea class="form-control" name="" cols="20" rows="5" id="mat1">1 2 3
+4 5 6
+7 8 9</textarea>
           </div>
           <div class="col-md-4">
               <br><br>
@@ -168,6 +176,9 @@
       <br><br><br>
       <h1 class="thin center">Matrix Info</h1>
       <br>
+      <p style="text-align:center">Please separate columns with single spaces, and rows go on new lines.</p>
+      <br>
+
       <select class="form-control" id="matselect">
           <option>Invert Matrix</option>
           <option>Transpose Matrix</option>
@@ -181,7 +192,9 @@
           <div class="col-md-4">
                   <br><br>
                   <h3 class="center">Matrix</h3>
-                  <textarea class="form-control" name="" cols="20" rows="5" id="mat3"></textarea>
+                  <textarea class="form-control" name="" cols="20" rows="5" id="mat3">1 2 3
+4 5 6
+7 8 9</textarea>
           </div>
           <div class="col-md-4">
               <br><br>
