@@ -48,7 +48,6 @@
     background-color: #74ff3b;
     color:#111
   }
-
   .calculator div.clear{
     grid-column: span 2;
     /* width: 120px; */
