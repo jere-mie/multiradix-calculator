@@ -65,36 +65,46 @@ function matmult(){
     var a = document.getElementById('mat1').value.split('\n');
     var b = document.getElementById('mat2').value.split('\n');
     let answer = document.getElementById('matanswer'); 
-    for(var i=0; i<a.length; i++){
-        a[i] = a[i].split(' ');
-    }        
-    for(var i=0; i<b.length; i++){
-        b[i] = b[i].split(' ');
-    }
-    var c = math.multiply(a,b);
-    console.log(c[0]);
-    let result = "";
-    for (var i=0; i<c.length; i++){
-        for(var j=0; j<c[i].length; j++){
-            result+=c[i][j];
-            result+=' ';
+    try{
+        for(var i=0; i<a.length; i++){
+            a[i] = a[i].split(' ');
+        }        
+        for(var i=0; i<b.length; i++){
+            b[i] = b[i].split(' ');
         }
-        result+='\n';
+        var c = math.multiply(a,b);
+        console.log(c[0]);
+        let result = "";
+        for (var i=0; i<c.length; i++){
+            for(var j=0; j<c[i].length; j++){
+                result+=c[i][j];
+                result+=' ';
+            }
+            result+='\n';
+        }
+        answer.value = result;
+    }catch{
+        answer.value = "Invalid Input";
     }
-    answer.value = result;        
+        
 }
 function matsolve(){
     var a = document.getElementById('mata').value.split('\n');
     var b = document.getElementById('matb').value.split('\n');
     let answer = document.getElementById('matx'); 
-    for(var i=0; i<a.length; i++){
-        a[i] = a[i].split(' ');
+    try{
+        for(var i=0; i<a.length; i++){
+            a[i] = a[i].split(' ');
+        }
+        const x = math.lusolve(a,b);
+        answer.value="";
+        for(var i=0; i<x.length; i++){
+            answer.value+=x[i]+'\n';
+        }    
+    }catch{
+        answer.value = "Invalid Input";
     }
-    const x = math.lusolve(a,b);
-    answer.value="";
-    for(var i=0; i<x.length; i++){
-        answer.value+=x[i]+'\n';
-    }    
+
 }
 
 
@@ -105,82 +115,95 @@ function matinfo(){
     var c = "X";
     var d = "";
     var result = "";
-    for(var i=0; i<a.length; i++){
-        a[i] = a[i].split(' ');
-        for(var j=0; j<a[i].length; j++){
-            a[i][j] = parseFloat(a[i][j]);
-        }
-    }
-    switch(select){
-        case "Invert Matrix":
-            c = math.inv(a);
-            break;
-        case "Transpose Matrix":
-            c = math.transpose(a);
-            break;
-        case "Calculate Determinant":
-            result = math.det(a);
-            break;
-        case "Calculate Trace":
-            result = math.trace(a);
-            break;
-        case "Calculate Eigenvalues":
-            console.log(math.eigs(a).values);
-            d = math.eigs(a).values;
-            for(var i=0; i<d.length; i++){
-                result+="=> "+d[i]+'\n';
+    try{
+        for(var i=0; i<a.length; i++){
+            a[i] = a[i].split(' ');
+            for(var j=0; j<a[i].length; j++){
+                a[i][j] = parseFloat(a[i][j]);
             }
-            break;
-        case "Calculate Eigenvectors":
-            console.log(math.eigs(a).vectors);
-            d = math.eigs(a).vectors;
-            for(var i=0; i<d.length; i++){
-                result+="Vector "+(i+1)+": ";
-                for(var j=0; j<d[i].length; j++){
-                    result+=d[i][j]+" ";
+        }
+        switch(select){
+            case "Invert Matrix":
+                c = math.inv(a);
+                break;
+            case "Transpose Matrix":
+                c = math.transpose(a);
+                break;
+            case "Calculate Determinant":
+                result = math.det(a);
+                break;
+            case "Calculate Trace":
+                result = math.trace(a);
+                break;
+            case "Calculate Eigenvalues":
+                console.log(math.eigs(a).values);
+                d = math.eigs(a).values;
+                for(var i=0; i<d.length; i++){
+                    result+="=> "+d[i]+'\n';
                 }
-                result+='\n';
-            }
-            break;
-    }
-    if(c=="X"){
-        answer.value = result;
-    }else{
-    for (var i=0; i<c.length; i++){
-        for(var j=0; j<c[i].length; j++){
-            result+=c[i][j];
-            result+=' ';
+                break;
+            case "Calculate Eigenvectors":
+                console.log(math.eigs(a).vectors);
+                d = math.eigs(a).vectors;
+                for(var i=0; i<d.length; i++){
+                    result+="Vector "+(i+1)+": ";
+                    for(var j=0; j<d[i].length; j++){
+                        result+=d[i][j]+" ";
+                    }
+                    result+='\n';
+                }
+                break;
         }
-        result+='\n';
+        if(c=="X"){
+            answer.value = result;
+        }else{
+        for (var i=0; i<c.length; i++){
+            for(var j=0; j<c[i].length; j++){
+                result+=c[i][j];
+                result+=' ';
+            }
+            result+='\n';
+        }
+        answer.value = result;
+        }
+    }catch{
+        answer.value = "Cannot Perform This Operation On Matrix Specified"
     }
-    answer.value = result;
-    }
+
 
 }
 
 
 function run(){
-    r1=parseInt(document.getElementById('r1').value);
-    r2=parseInt(document.getElementById('r2').value);
-    num=document.getElementById('num').value;
-    // var newnum = parseInt(num,r1);
-    var newnum = convert(num,r1); //converts to base 10
-    newnum = newnum.toString(r2); //converts to base r2
     answer = document.getElementById('answer');
-    answer.value = newnum;
+    try{
+        r1=parseInt(document.getElementById('r1').value);
+        r2=parseInt(document.getElementById('r2').value);
+        num=document.getElementById('num').value;
+        // var newnum = parseInt(num,r1);
+        var newnum = convert(num,r1); //converts to base 10
+        newnum = newnum.toString(r2); //converts to base r2
+        answer.value = newnum;    
+    }catch{
+        answer.value = "Invalid Input";
+    }
 }
 function solve(){
     exprrad=parseInt(document.getElementById('exprrad').value);
     expr=document.getElementById('expr').value;
-    var result = 0;
-    console.log(exprrad);
-    if (exprrad==10){
-      result = math.evaluate(expr);
-    }else{
-      result = convertExpr(expr,exprrad);
+    try{
+        var result = 0;
+        console.log(exprrad);
+        if (exprrad==10){
+          result = math.evaluate(expr);
+        }else{
+          result = convertExpr(expr,exprrad);
+        }
+        answer2 = document.getElementById('expr');
+        answer2.value = result;    
+    }catch{
+        expr.value="Invalid Expression";
     }
-    answer2 = document.getElementById('expr');
-    answer2.value = result;
     // expr.value=result;
     
 }
