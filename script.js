@@ -89,11 +89,9 @@ function matsolve(){
     let answer = document.getElementById('matx'); 
     for(var i=0; i<a.length; i++){
         a[i] = a[i].split(' ');
-    }        
-    // for(var i=0; i<b.length; i++){
-    //     b[i] = b[i].split(' ');
-    // }
+    }
     const x = math.lusolve(a,b);
+    answer.value="";
     for(var i=0; i<x.length; i++){
         answer.value+=x[i]+'\n';
     }    
