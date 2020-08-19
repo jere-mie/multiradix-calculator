@@ -83,6 +83,22 @@ function matmult(){
     }
     answer.value = result;        
 }
+function matsolve(){
+    var a = document.getElementById('mata').value.split('\n');
+    var b = document.getElementById('matb').value.split('\n');
+    let answer = document.getElementById('matx'); 
+    for(var i=0; i<a.length; i++){
+        a[i] = a[i].split(' ');
+    }        
+    // for(var i=0; i<b.length; i++){
+    //     b[i] = b[i].split(' ');
+    // }
+    const x = math.lusolve(a,b);
+    for(var i=0; i<x.length; i++){
+        answer.value+=x[i]+'\n';
+    }    
+}
+
 
 function matinfo(){
     var a = document.getElementById('mat3').value.split('\n');

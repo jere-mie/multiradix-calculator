@@ -38,6 +38,9 @@
             <a class="nav-link" href="#matmultiplier">Matrix Multiplier <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item active">
+            <a class="nav-link" href="#matsolve">Ax=b Solver <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
             <a class="nav-link" href="#matcalc">Other Matrix Calculations <span class="sr-only">(current)</span></a>
           </li>
         </ul>
@@ -179,6 +182,48 @@
           </div>
       </div>
   </div>
+
+
+  <div class="container" id="matsolve">
+    <br><br><br>
+    <h1 class="thin center">A x = b Matrix Solver</h1>
+    <br>
+    <p style="text-align:center">Please separate columns with single spaces, and rows go on new lines.</p>
+    <br>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+                <br><br>
+                <h3 class="center">A Matrix</h3>
+                <textarea class="form-control" name="" cols="20" rows="5" id="mata">1 0 0 0
+0 2 0 0
+0 0 3 0
+0 0 0 4</textarea>
+        </div>
+        <div class="col-md-4">
+            <br><br>
+            <h3 class="center">B Vector</h3>
+            <textarea class="form-control" name="" cols="20" rows="5" id="matb">-1
+-1
+-1
+-1
+            </textarea>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <br><br>
+            <p class="center">
+                <button class="btn btn-outline-primary" onclick="matsolve()">Solve</button>
+            </p>
+            <h3 class="center">X Vector</h3>
+            <textarea class="form-control" name="" cols="20" rows="5" id="matx" readonly></textarea>    
+        </div>
+    </div>
+</div>
+
 
 
   <div class="container" id="matcalc">
